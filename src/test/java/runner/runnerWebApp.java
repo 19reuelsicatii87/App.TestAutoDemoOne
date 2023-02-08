@@ -1,8 +1,7 @@
 package runner;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.testng.annotations.DataProvider;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.CucumberOptions.SnippetType;
@@ -16,8 +15,9 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 		features = {"featurefiles/login.feature"},
 		dryRun = !true,
 		snippets = SnippetType.CAMELCASE,
-		monochrome = true,
+		monochrome = true,				
 		glue = { "webApp.AppName"},
+		//tags =  "@One",
 		plugin =  {
 				
 				"pretty",

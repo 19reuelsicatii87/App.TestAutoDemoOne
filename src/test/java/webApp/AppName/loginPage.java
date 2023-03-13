@@ -2,16 +2,21 @@ package webApp.AppName;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import helper.webAppContextDriver;
 import helper.webAppHelper;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,7 +28,7 @@ public class loginPage extends webAppHelper {
 	By login_link = By.xpath("(//span[text()='Login'])[1]/..");
 	By username_textfield = By.cssSelector("input[formcontrolname='username']");
 	By password_textfield = By.cssSelector("input[formcontrolname='password']");
-	By login_button = By.xpath("(//span[text()='Login'])[last()]/..");	
+	By login_button = By.xpath("(//span[text()='Login'])[last()]/..");
 	By profile_link = By.xpath("//button[contains(@class,'mat-focus-indicator mat-menu-trigger')]//span[1]");
 	By alert_message = By.cssSelector("mat-error[role='alert']");
 
@@ -61,7 +66,7 @@ public class loginPage extends webAppHelper {
 	}
 
 	@Given("User enter the password as {string}")
-	public void userEnterThePasswordAs(String password) {
+	public void userEnterThePasswordAs(String password) throws IOException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
 		context.getDriver().findElement(password_textfield).sendKeys(password);
 	}
@@ -74,7 +79,7 @@ public class loginPage extends webAppHelper {
 	}
 
 	@Then("Login should be success")
-	public void loginShouldBeSuccess() throws InterruptedException {
+	public void loginShouldBeSuccess() throws InterruptedException, IOException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
 		context.getWait().until(ExpectedConditions.presenceOfElementLocated(profile_link));
 		assertEquals(context.getDriver().findElement(profile_link).isDisplayed(), true);

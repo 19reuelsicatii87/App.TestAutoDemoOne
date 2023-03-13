@@ -29,6 +29,7 @@ Feature: User Authentication tests
       | chrome  | https://bookcart.azurewebsites.net/ |
       | edge    | https://bookcart.azurewebsites.net/ |
 
+
   @negative
   Scenario Outline: Login should not be success
     Given User navigates to "<url>" using "<browser>"

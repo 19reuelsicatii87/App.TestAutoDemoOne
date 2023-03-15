@@ -2,7 +2,7 @@ Feature: Calculator Mobile tests
 
   Background: #<Describe Here a PreCondition for ff scenarios>
 
-  @Add
+  @native @Add
   Scenario Outline: Addition operation with 2x2 numbers
     Given User opens "nativeCalculator" App
     And User click on the agree button
@@ -17,3 +17,12 @@ Feature: Calculator Mobile tests
     Examples: 
       | number11 | number12 | number21 | number22 | sum |
       |        1 |        2 |        3 |        4 |  46 |
+
+  @web
+  Scenario: Addition operation with 2x2 numbers
+    Given User opens "webChrome" App
+    And User click on the login link
+    And User enter the username as "ortoni"
+    And User enter the password as "Pass1234"
+    When User click on the login button
+    Then Login should be success

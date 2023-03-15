@@ -22,7 +22,7 @@ public class mobileAppHelper {
 		// Capabilities of MobilePhone
 		// ==================================================================
 		mobileCapabilities.setCapability("deviceName", "NIMPHUS_PHONE");
-		mobileCapabilities.setCapability("udid", "ca17fd6c");
+		mobileCapabilities.setCapability("udid", "192.168.0.13:5555");
 		mobileCapabilities.setCapability("platformName", "Android");
 		mobileCapabilities.setCapability("platformVersion", "10 QKQ1.190828.002");
 		mobileCapabilities.setCapability("automationName", "UiAutomator2");
@@ -40,12 +40,12 @@ public class mobileAppHelper {
 			// Capabilities of MobilePhone - Application (webChrome)
 			// ==================================================================
 			mobileCapabilities.setCapability("appPackage", "com.android.chrome");
-			mobileCapabilities.setCapability("appActivity", "com.android.chrome");
+			mobileCapabilities.setCapability("appActivity", "com.google.android.apps.chrome.Main");
 		}
 
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 		appiumDriver = new AppiumDriver(url, mobileCapabilities);
-		appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		return appiumDriver;
 
 	}

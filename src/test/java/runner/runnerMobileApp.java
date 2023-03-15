@@ -17,7 +17,7 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 		snippets = SnippetType.CAMELCASE,
 		monochrome = true,				
 		glue = { "mobileApp.AppName"},
-		tags =  "@Add",
+		tags =  "@web",
 		plugin =  {
 				
 				"pretty",

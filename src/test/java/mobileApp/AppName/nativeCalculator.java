@@ -18,7 +18,7 @@ public class nativeCalculator extends mobileAppHelper {
 	By agree_button = By.id("android:id/button1");
 	By add_button = By.id("com.miui.calculator:id/btn_plus_s");
 	By equal_button = By.id("com.miui.calculator:id/btn_equal_s");
-	By result = By.id("com.miui.calculator:id/expression");
+	By result = By.id("com.miui.calculator:id/result");
 
 	// Sub Section - Element Finder
 	// ===================================
@@ -57,7 +57,7 @@ public class nativeCalculator extends mobileAppHelper {
 	public void userClickOnTheAddButton() {
 		context.getAppiumDriver().findElement(add_button).click();
 	}
-	
+
 	@Given("User click on the agree button")
 	public void userClickOnTheAgreeButton() {
 		context.getAppiumDriver().findElement(agree_button).click();
@@ -71,7 +71,7 @@ public class nativeCalculator extends mobileAppHelper {
 
 	@Then("User validates that sum is {string}")
 	public void userValidatesThatSumIs(String sum) {
-		assertEquals(context.getAppiumDriver().findElement(result).getText(), sum);
+		assertEquals(context.getAppiumDriver().findElement(result).getText().replace("=", ""), sum);
 	}
 
 }

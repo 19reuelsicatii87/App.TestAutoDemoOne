@@ -5,10 +5,16 @@ import static org.testng.Assert.assertEquals;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import helper.mobileAppContextDriver;
 import helper.mobileAppHelper;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,12 +23,10 @@ public class webChome extends mobileAppHelper {
 
 	// Page Elements
 	// ==========================================
-	By login_link = By.xpath("(//span[text()='Login'])[1]/..");
-	By username_textfield = By.cssSelector("input[formcontrolname='username']");
-	By password_textfield = By.cssSelector("input[formcontrolname='password']");
-	By login_button = By.xpath("(//span[text()='Login'])[last()]/..");
-	By profile_link = By.xpath("//button[contains(@class,'mat-focus-indicator mat-menu-trigger')]//span[1]");
-	By alert_message = By.cssSelector("mat-error[role='alert']");
+	By fullname_text = By.xpath("//input[@placeholder='Juan Dela Cruz']");
+	By emailAddress_text = By.xpath("//input[@placeholder='juandelacruz@gmail.com']");
+	By submit_button = By.xpath("//button[normalize-space()='Submit']");
+	By error_message = By.xpath("//p[@class='text-start text-danger']//small[1]");
 
 	// Declare Driver Instance
 	// ==========================================
@@ -33,37 +37,36 @@ public class webChome extends mobileAppHelper {
 		this.context = context;
 	}
 
-	@Given("User click on the login link")
-	public void userClickOnTheLoginLink() {
+	@Given("User enter the fullName as {string}")
+	public void userEnterTheFullNameAs(String fullName) {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getWait().until(ExpectedConditions.presenceOfElementLocated(login_link));
-		context.getAppiumDriver().findElement(login_link).click();
+		context.getAppiumDriver().findElement(fullname_text).sendKeys(fullName);
 	}
 
-	@Given("User enter the username as {string}")
-	public void userEnterTheUsernameAs(String username) {
+	@Given("User enter the emailAddress as {string}")
+	public void userEnterTheEmailAddressAs(String emailAddress) throws IOException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getAppiumDriver().findElement(username_textfield).sendKeys(username);
+		context.getAppiumDriver().findElement(emailAddress_text).sendKeys(emailAddress);
 	}
 
-	@Given("User enter the password as {string}")
-	public void userEnterThePasswordAs(String password) throws IOException {
+	@When("User click on the Submit button")
+	public void userClickOnTheSubmitButton() throws InterruptedException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getAppiumDriver().findElement(password_textfield).sendKeys(password);
+		context.getWait().until(ExpectedConditions.presenceOfElementLocated(submit_button));
+	
+		Actions actions = new Actions(context.getAppiumDriver());	
+		actions.scrollByAmount(231, 995).build().perform();
+		//actions.moveToElement(context.getAppiumDriver().findElement(submit_button)).click().build().perform();
+		context.getAppiumDriver().findElement(submit_button).click();
+
 	}
 
-	@When("User click on the login button")
-	public void userClickOnTheLoginButton() {
+	@Then("User sees errorMessage")
+	public void userSeesErrorMessage() throws InterruptedException, IOException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getWait().until(ExpectedConditions.presenceOfElementLocated(login_button));
-		context.getAppiumDriver().findElement(login_button).click();
-	}
-
-	@Then("Login should be success")
-	public void loginShouldBeSuccess() throws InterruptedException, IOException {
-		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getWait().until(ExpectedConditions.presenceOfElementLocated(profile_link));
-		assertEquals(context.getAppiumDriver().findElement(profile_link).isDisplayed(), true);
+		context.getWait().until(ExpectedConditions.presenceOfElementLocated(error_message));
+		assertEquals(context.getAppiumDriver().findElement(error_message).getText()
+				.equals("Please indicate that you have read and agree 'Terms of Use' and Privacy Policy"), true);
 	}
 
 }

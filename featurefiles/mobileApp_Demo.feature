@@ -21,8 +21,7 @@ Feature: Calculator Mobile tests
   @web
   Scenario: Addition operation with 2x2 numbers
     Given User opens "webChrome" App
-    And User click on the login link
-    And User enter the username as "ortoni"
-    And User enter the password as "Pass1234"
-    When User click on the login button
-    Then Login should be success
+    And User enter the fullName as "ortoni"
+    And User enter the emailAddress as "Pass1234@gmail.com"
+    When User click on the Submit button
+    Then User sees errorMessage

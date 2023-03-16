@@ -38,15 +38,6 @@ public class nativeCalculator extends mobileAppHelper {
 		this.context = context;
 	}
 
-	@Given("User opens {string} App")
-	public void userOpensApp(String string) throws MalformedURLException, InterruptedException {
-		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.setAppiumDriver(initializeMobile(string));
-		context.setWait(initializeMobileWait(context.getAppiumDriver()));
-		Thread.sleep(10000);
-
-	}
-
 	@Given("User click on the {string} button")
 	public void userClickOnTheButton(String number) {
 		context.getAppiumDriver().findElement(numberElementFinder(number)).click();

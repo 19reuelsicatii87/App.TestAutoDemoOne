@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,8 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.AppiumDriver;
 
 public class mobileAppHelper {
-
-
 
 	public AppiumDriver initializeMobile(String mobileAppName) throws MalformedURLException {
 
@@ -26,7 +25,7 @@ public class mobileAppHelper {
 		mobileCapabilities.setCapability("platformName", "Android");
 		mobileCapabilities.setCapability("platformVersion", "10 QKQ1.190828.002");
 		mobileCapabilities.setCapability("automationName", "UiAutomator2");
-		mobileCapabilities.setCapability("autoGrantPermissions", "true");
+		mobileCapabilities.setCapability("autoGrantPermissions", true);
 
 		if (mobileAppName.contentEquals("nativeCalculator")) {
 
@@ -37,10 +36,16 @@ public class mobileAppHelper {
 
 		} else if (mobileAppName.contentEquals("webChrome")) {
 
+			// Disable Chrome Welcome Screen
+			// ==================================================================
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-fre");
+
 			// Capabilities of MobilePhone - Application (webChrome)
 			// ==================================================================
-			mobileCapabilities.setCapability("appPackage", "com.android.chrome");
+			//mobileCapabilities.setCapability("appPackage", "com.android.chrome");
 			mobileCapabilities.setCapability("appActivity", "com.google.android.apps.chrome.Main");
+			mobileCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 		}
 
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
@@ -49,7 +54,7 @@ public class mobileAppHelper {
 		return appiumDriver;
 
 	}
-	
+
 	public WebDriverWait initializeMobileWait(AppiumDriver appiumDriver) throws MalformedURLException {
 
 		return new WebDriverWait(appiumDriver, Duration.ofSeconds(30));

@@ -40,13 +40,15 @@ public class webChome extends mobileAppHelper {
 	@Given("User enter the fullName as {string}")
 	public void userEnterTheFullNameAs(String fullName) {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getAppiumDriver().findElement(fullname_text).sendKeys(fullName);
+		context.getWait().until(ExpectedConditions.presenceOfElementLocated(fullname_text));
+		context.getAndroidDriver().findElement(fullname_text).sendKeys(fullName);
 	}
 
 	@Given("User enter the emailAddress as {string}")
 	public void userEnterTheEmailAddressAs(String emailAddress) throws IOException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-		context.getAppiumDriver().findElement(emailAddress_text).sendKeys(emailAddress);
+		context.getWait().until(ExpectedConditions.presenceOfElementLocated(emailAddress_text));
+		context.getAndroidDriver().findElement(emailAddress_text).sendKeys(emailAddress);
 	}
 
 	@When("User click on the Submit button")
@@ -54,10 +56,10 @@ public class webChome extends mobileAppHelper {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
 		context.getWait().until(ExpectedConditions.presenceOfElementLocated(submit_button));
 	
-		Actions actions = new Actions(context.getAppiumDriver());	
+		Actions actions = new Actions(context.getAndroidDriver());	
 		actions.scrollByAmount(231, 995).build().perform();
-		//actions.moveToElement(context.getAppiumDriver().findElement(submit_button)).click().build().perform();
-		context.getAppiumDriver().findElement(submit_button).click();
+		//actions.moveToElement(context.getAndroidDriver().findElement(submit_button)).click().build().perform();
+		context.getAndroidDriver().findElement(submit_button).click();
 
 	}
 
@@ -65,7 +67,7 @@ public class webChome extends mobileAppHelper {
 	public void userSeesErrorMessage() throws InterruptedException, IOException {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
 		context.getWait().until(ExpectedConditions.presenceOfElementLocated(error_message));
-		assertEquals(context.getAppiumDriver().findElement(error_message).getText()
+		assertEquals(context.getAndroidDriver().findElement(error_message).getText()
 				.equals("Please indicate that you have read and agree 'Terms of Use' and Privacy Policy"), true);
 	}
 

@@ -47,7 +47,7 @@ public class mobileAppHook extends webAppHelper {
 				+ context.getScenario().getName() + "_"
 				+ timeStamp + ".png";
 
-		SrcFile = ((TakesScreenshot) context.getAppiumDriver()).getScreenshotAs(OutputType.FILE);
+		SrcFile = ((TakesScreenshot) context.getAndroidDriver()).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(SrcFile, new File(DestFile));
 		context.getScenario().attach(
 				FileUtils.readFileToByteArray(SrcFile),"image/png", context.getScenario().getStatus().toString());
@@ -59,7 +59,7 @@ public class mobileAppHook extends webAppHelper {
 		System.out.println("Im in a AfterScenario");
 		System.out.println("AfterScenario - Thread ID" + Thread.currentThread().getId());
 
-		context.getAppiumDriver().quit();
+		context.getAndroidDriver().quit();
 	}
 
 }

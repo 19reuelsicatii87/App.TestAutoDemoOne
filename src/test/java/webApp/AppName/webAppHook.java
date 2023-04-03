@@ -133,8 +133,6 @@ public class webAppHook extends webAppHelper {
 	public static void afterAll() {
 
 		System.out.println("Im in a After Scenario");
-
-		System.out.println("Im in a After Scenario");
 		extentReports.flush();
 
 	}

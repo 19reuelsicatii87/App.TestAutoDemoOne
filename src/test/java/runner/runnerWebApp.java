@@ -12,16 +12,15 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 @CucumberOptions(
 		
 		
-		features = {"featurefiles/webApp_Demo.feature"},
+		features = {"featurefiles/webApp_Demo.feature", "featurefiles/webApp_Demo2.feature"},
 		dryRun = !true,
 		snippets = SnippetType.CAMELCASE,
 		monochrome = true,				
 		glue = { "webApp.AppName"},
-		tags =  "@One",
+		//tags =  "@One",
 		plugin =  {
 				
 				"pretty",
-				//"html:reports/results" + new SimpleDateFormat("yyyyMMdd_hhmmssa").format(new Date()) + ".html",
 				"html:reports/results.html",
 				"json:reports/results.json",
 				"junit:reports/results.xml"

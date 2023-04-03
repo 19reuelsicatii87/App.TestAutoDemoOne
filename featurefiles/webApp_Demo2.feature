@@ -1,4 +1,4 @@
-@UserAuthentication01
+@UserAuthentication02
 Feature: User Authentication tests
 
   Background: #<Describe Here a PreCondition for ff scenarios>
@@ -39,6 +39,7 @@ Feature: User Authentication tests
     When User click on the login button
     But User sees that login is not successful
 
+    @examples
     Examples: 
       | browser | url                                 |
       | chrome  | https://bookcart.azurewebsites.net/ |

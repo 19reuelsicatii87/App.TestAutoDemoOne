@@ -7,7 +7,7 @@
 
 	<!-- Use below configuration to choose between Local Selenium Grid or BrowserStack Grid -->
 	<!-- value=Browser for Local Selenium Grid and value=BrowserStack for BrowserStack Grid execution -->
-	<entry key="Grid">BrowserStack</entry>
+	<entry key="Grid">Browser</entry>
 
 
 	<!-- Use below configuration for WebApp BrowserStack Configuration -->

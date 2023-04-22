@@ -20,27 +20,12 @@ public class mobileAppHelper {
 
 	public static Properties properties;
 
-	public static String GetPropertValue(String Path, String Key) {
-
-		properties = new Properties();
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream(Path);
-			properties.loadFromXML(fis);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return properties.getProperty(Key);
-
-	}
-
 	public AppiumDriver initializeAppiumDriver(String mobileAppName) throws MalformedURLException {
 
 		DesiredCapabilities mobileCapabilities = new DesiredCapabilities();
 		AppiumDriver appiumDriver = null;
 
-		if (GetPropertValue("data/TestProperties.xml", "Grid").equalsIgnoreCase("Browser")) {
+		if (GetPropertValue("data/TestProperties.xml", "mobileAppGrid").equalsIgnoreCase("Browser")) {
 
 			// Capabilities of MobilePhone
 			// ==================================================================
@@ -78,7 +63,7 @@ public class mobileAppHelper {
 
 		}
 
-		else if (GetPropertValue("data/TestProperties.xml", "Grid").equalsIgnoreCase("BrowserStack")) {
+		else if (GetPropertValue("data/TestProperties.xml", "mobileAppGrid").equalsIgnoreCase("BrowserStack")) {
 
 			// Set your access credentials
 			mobileCapabilities.setCapability("browserstack.user", "licenses_l5aIeD");
@@ -96,7 +81,7 @@ public class mobileAppHelper {
 
 			// Set URL of the application under test
 			mobileCapabilities.setCapability("app", "bs://0bbe7bfd19a3d75171be8773848a436ce1de0ade");
-			//mobileCapabilities.setCapability("browserName", "Chrome");
+			// mobileCapabilities.setCapability("browserName", "Chrome");
 
 			// Disable all pop-ups in Chrome
 			// ==================================================================
@@ -114,13 +99,13 @@ public class mobileAppHelper {
 		return appiumDriver;
 
 	}
-	
+
 	public AndroidDriver initializeAndroidDriver(String mobileAppName) throws MalformedURLException {
 
 		DesiredCapabilities mobileCapabilities = new DesiredCapabilities();
 		AndroidDriver androidDriver = null;
 
-		if (GetPropertValue("data/TestProperties.xml", "Grid").equalsIgnoreCase("Browser")) {
+		if (GetPropertValue("data/TestProperties.xml", "mobileAppGrid").equalsIgnoreCase("Browser")) {
 
 			// Capabilities of MobilePhone
 			// ==================================================================
@@ -158,7 +143,7 @@ public class mobileAppHelper {
 
 		}
 
-		else if (GetPropertValue("data/TestProperties.xml", "Grid").equalsIgnoreCase("BrowserStack")) {
+		else if (GetPropertValue("data/TestProperties.xml", "mobileAppGrid").equalsIgnoreCase("BrowserStack")) {
 
 			// Set your access credentials
 			mobileCapabilities.setCapability("browserstack.user", "licenses_l5aIeD");
@@ -176,7 +161,7 @@ public class mobileAppHelper {
 
 			// Set URL of the application under test
 			mobileCapabilities.setCapability("app", "bs://0bbe7bfd19a3d75171be8773848a436ce1de0ade");
-			//mobileCapabilities.setCapability("browserName", "Chrome");
+			// mobileCapabilities.setCapability("browserName", "Chrome");
 
 			// Disable all pop-ups in Chrome
 			// ==================================================================
@@ -185,7 +170,7 @@ public class mobileAppHelper {
 			options.setExperimentalOption("excludeSwitches", Arrays.asList("disable-popup-blocking"));
 			mobileCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 			mobileCapabilities.setCapability("autoGrantPermissions", true);
-			
+
 			// Set Appium version
 			// ==================================================================
 			HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
@@ -193,7 +178,7 @@ public class mobileAppHelper {
 			mobileCapabilities.setCapability("bstack:options", browserstackOptions);
 
 			URL url = new URL("https://licenses_l5aIeD:QYTmGxxvTJ9bxLAERqYU@hub-cloud.browserstack.com/wd/hub");
-			androidDriver= new AndroidDriver(url, mobileCapabilities);
+			androidDriver = new AndroidDriver(url, mobileCapabilities);
 			androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		}
 
@@ -204,6 +189,21 @@ public class mobileAppHelper {
 	public WebDriverWait initializeMobileWait(AppiumDriver appiumDriver) throws MalformedURLException {
 
 		return new WebDriverWait(appiumDriver, Duration.ofSeconds(30));
+
+	}
+
+	public static String GetPropertValue(String Path, String Key) {
+
+		properties = new Properties();
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(Path);
+			properties.loadFromXML(fis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return properties.getProperty(Key);
 
 	}
 

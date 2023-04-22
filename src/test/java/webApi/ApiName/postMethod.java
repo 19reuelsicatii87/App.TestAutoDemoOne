@@ -27,15 +27,14 @@ public class postMethod extends webApiHelper {
 		// Create POST Request
 		// ===========================================
 		RestAssured.baseURI = "https://reqres.in/api/users";
-		RequestSpecification httpRequest = RestAssured.given(); 
-		JsonObject requestParams = new JsonObject(); 
-		requestParams.addProperty("name", "morpheus"); 
-		requestParams.addProperty("job", "leader"); 
-		httpRequest.header("Content-Type", "application/json"); 
-		httpRequest.body(requestParams.toString()); 
+		RequestSpecification httpRequest = RestAssured.given();
+		JsonObject requestParams = new JsonObject();
+		requestParams.addProperty("name", "morpheus");
+		requestParams.addProperty("job", "leader");
+		httpRequest.header("Content-Type", "application/json");
+		httpRequest.body(requestParams.toString());
 		Response response = httpRequest.post();
-		
-		
+
 		// Store Response
 		// ===========================================
 		System.out.println("Create User");
@@ -43,22 +42,21 @@ public class postMethod extends webApiHelper {
 		System.out.println(response.prettyPrint());
 
 	}
-	
+
 	@Test
 	public void registerUser() {
 
 		// Create POST Request
 		// ===========================================
 		RestAssured.baseURI = "https://reqres.in/api/register";
-		RequestSpecification httpRequest = RestAssured.given(); 
-		JsonObject requestParams = new JsonObject(); 
-		requestParams.addProperty("email", "eve.holt@reqres.in"); 
-		requestParams.addProperty("password", "pistol"); 
-		httpRequest.header("Content-Type", "application/json"); 
-		httpRequest.body(requestParams.toString()); 
+		RequestSpecification httpRequest = RestAssured.given();
+		JsonObject requestParams = new JsonObject();
+		requestParams.addProperty("email", "eve.holt@reqres.in");
+		requestParams.addProperty("password", "pistol");
+		httpRequest.header("Content-Type", "application/json");
+		httpRequest.body(requestParams.toString());
 		Response response = httpRequest.post();
-		
-		
+
 		// Store Response
 		// ===========================================
 		System.out.println("Register User");

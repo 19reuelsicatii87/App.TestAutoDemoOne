@@ -12,12 +12,12 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 @CucumberOptions(
 		
 		
-		features = {"featurefiles/mobileApp_Demo.feature"},
+		features = {"featurefiles/webApi_Demo.feature"},
 		dryRun = !true,
 		snippets = SnippetType.CAMELCASE,
 		monochrome = true,				
-		glue = { "mobileApp.AppName"},
-		tags =  "@mobileWebAppLocal",
+		glue = { "webApi.ApiName"},
+		tags =  "@UserList",
 		plugin =  {
 				
 				"pretty",
@@ -29,7 +29,7 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 
 	)
 
-public class runnerMobileApp extends AbstractTestNGCucumberTests {	
+public class runnerWebApi extends AbstractTestNGCucumberTests {	
 	
 	
 	// Running Cucumber - Parallel Test

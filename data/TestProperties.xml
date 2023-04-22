@@ -7,7 +7,8 @@
 
 	<!-- Use below configuration to choose between Local Selenium Grid or BrowserStack Grid -->
 	<!-- value=Browser for Local Selenium Grid and value=BrowserStack for BrowserStack Grid execution -->
-	<entry key="Grid">BrowserStack</entry>
+	<entry key="webAppGrid">Browser</entry>
+	<entry key="mobileAppGrid">Browser</entry>
 
 
 	<!-- Use below configuration for WebApp BrowserStack Configuration -->
@@ -17,9 +18,9 @@
 
 
 	<!-- Use below configuration for Mobile BrowserStack Configuration -->
-	<entry key="os">Windows</entry>
-	<entry key="os_version">10</entry>
-	<entry key="browser_version">80</entry>
+	<entry key="platformName">Android</entry>
+	<entry key="os_version">10 QKQ1.190828.002</entry>
+	<entry key="appActivity">com.google.android.apps.chrome.Main</entry>
 
 
 

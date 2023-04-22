@@ -8,14 +8,14 @@ import io.cucumber.java.en.When;
 
 import helper.webAppContextDriver;
 
-public class dummy2 {
+public class SoftvsHardAssert {
 
 	// Declare Driver Instance
 	// ==========================================
 	private webAppContextDriver context;
 	SoftAssert softAssetion = new SoftAssert();
 
-	public dummy2(webAppContextDriver context) {
+	public SoftvsHardAssert(webAppContextDriver context) {
 		super();
 		this.context = context;
 	}

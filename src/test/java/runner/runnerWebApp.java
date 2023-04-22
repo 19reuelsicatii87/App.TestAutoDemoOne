@@ -12,12 +12,12 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 @CucumberOptions(
 		
 		
-		features = {"featurefiles/webApp_Demo.feature", "featurefiles/webApp_Demo2.feature"},
+		features = {"featurefiles/webApp_Demo.feature"},
 		dryRun = !true,
 		snippets = SnippetType.CAMELCASE,
 		monochrome = true,				
 		glue = { "webApp.AppName"},
-		//tags =  "@One",
+		tags =  "@One",
 		plugin =  {
 				
 				"pretty",

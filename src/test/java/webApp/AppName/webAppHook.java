@@ -29,14 +29,18 @@ import io.cucumber.java.Scenario;
 
 public class webAppHook extends webAppHelper {
 
-	// Declare Driver Instance
+	// Properties
 	// ==========================================
-	private webAppContextDriver context;
-	private String DestFile;
+
+	private String DestFile, SrcImage;
 	private File SrcFile;
 
 	private static ExtentTest featureExtentTest;
 	private ExtentTest scenarioExtentTest;
+
+	// Declare Driver Instance
+	// ==========================================
+	private webAppContextDriver context;
 
 	public webAppHook(webAppContextDriver context) {
 		super();
@@ -48,12 +52,18 @@ public class webAppHook extends webAppHelper {
 
 	@BeforeAll
 	public static void beforeALl() throws ClassNotFoundException {
-
-		System.out.println("Im in a BeforeAll Scenario");
-		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
+		System.out.println("Im in BeforeAll - TestSuite Level - Thread ID" + Thread.currentThread().getId());
 
 		// Define Extent Report
-		extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/reports/extentReport"
+		// ====================================================
+		/*
+		 * extentSparkReporter = new ExtentSparkReporter( System.getProperty("user.dir")
+		 * + "/reports/extentReport/" + yyMMdd + "/" + HHmmss + ".html");
+		 */
+
+		// Define Extent Report XAMPP htdocs Folder - Image not resolving
+		// ==============================================================================
+		extentSparkReporter = new ExtentSparkReporter("C:/xampp/htdocs/AutomationProject/reports/extentReport"
 				+ new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".html");
 
 		extentReports.attachReporter(extentSparkReporter);
@@ -62,8 +72,8 @@ public class webAppHook extends webAppHelper {
 
 	@Before
 	public void before(Scenario scenario) throws ClassNotFoundException {
-		System.out.println("Im in a Before Scenario");
-		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
+		System.out.println("Im in Before - Scenario Level - Thread ID" + Thread.currentThread().getId());
+		
 		context.setScenario(scenario);
 
 		// Set SoftAssert
@@ -85,18 +95,36 @@ public class webAppHook extends webAppHelper {
 
 	@BeforeStep
 	public void beforeStep() throws IOException, ClassNotFoundException {
-		System.out.println("Im in a Before StepDefination");
+		System.out.println("Im in BeforeStep - Step Level - Thread ID" + Thread.currentThread().getId());
 
 	}
 
 	@AfterStep
 	public void afterStep(Scenario scenario) throws IOException {
-
-		System.out.println("Im in a AfterStep StepDefination");
+		System.out.println("Im in AfterStep - Step Level - Thread ID" + Thread.currentThread().getId());
 
 		try {
 
-			DestFile = System.getProperty("user.dir") + "\\screenshots\\"
+			// XAMPP Symbolic Link - Image not resolving
+			// ====================================================
+			/*
+			 * DestFile = System.getProperty("user.dir") + "/reports/screenshots/" + yyMMdd
+			 * + "/" + HHmmss +
+			 * scenario.getSourceTagNames().toArray()[0].toString().replace("@", "") + "_" +
+			 * new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".png";
+			 * 
+			 * SrcImage = "/reports/screenshots/" + yyMMdd + "/" + HHmmss +
+			 * scenario.getSourceTagNames().toArray()[0].toString().replace("@", "") + "_" +
+			 * new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".png";
+			 */
+
+			// XAMPP htdocs Folder - Image not resolving
+			// ====================================================
+			DestFile = "C:/xampp/htdocs/AutomationProject/screenshots/"
+					+ scenario.getSourceTagNames().toArray()[0].toString().replace("@", "") + "_"
+					+ new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".png";
+
+			SrcImage = "/AutomationProject/screenshots/"
 					+ scenario.getSourceTagNames().toArray()[0].toString().replace("@", "") + "_"
 					+ new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".png";
 
@@ -111,7 +139,7 @@ public class webAppHook extends webAppHelper {
 
 			// Attached Screenshot to Extent Report
 			context.getExtentTestScenario().createNode(" ======================================== ")
-					.info("Captured Screenshot: ", MediaEntityBuilder.createScreenCaptureFromPath(DestFile).build());
+					.info("Captured Screenshot: ", MediaEntityBuilder.createScreenCaptureFromPath(SrcImage).build());
 
 		} catch (Exception e) {
 			// Extent Report
@@ -123,16 +151,15 @@ public class webAppHook extends webAppHelper {
 
 	@After
 	public void after() throws IOException {
-		System.out.println("Im in a After Scenario");
-		System.out.println("AfterScenario - Thread ID" + Thread.currentThread().getId());
+		System.out.println("Im in After - Scenario Level - Thread ID" + Thread.currentThread().getId());
 
 		context.getDriver().quit();
 	}
 
 	@AfterAll
 	public static void afterAll() {
-
-		System.out.println("Im in a After Scenario");
+		System.out.println("Im in After - TestSuite Level - Thread ID" + Thread.currentThread().getId());
+		
 		extentReports.flush();
 
 	}

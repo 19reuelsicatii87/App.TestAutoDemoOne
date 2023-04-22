@@ -1,7 +1,5 @@
 package webApp.AppName;
 
-import static org.testng.Assert.assertEquals;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -15,6 +13,9 @@ import helper.webAppHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import webApp.AppName.pageObject.LoginPage;
+import webApp.AppName.pageObject.PageObject;
+import webApp.AppName.pageObject.ObjectService;
 
 public class loginPage extends webAppHelper {
 
@@ -26,6 +27,8 @@ public class loginPage extends webAppHelper {
 	By login_button = By.xpath("(//span[text()='Login'])[last()]/..");
 	By profile_link = By.xpath("//button[contains(@class,'mat-focus-indicator mat-menu-trigger')]//span[1]");
 	By alert_message = By.cssSelector("mat-error[role='alert']");
+
+	PageObject loginPage = new PageObject(new LoginPage());
 
 	// Declare Driver Instance
 	// ==========================================
@@ -44,7 +47,6 @@ public class loginPage extends webAppHelper {
 
 		try {
 			// Step Definition
-			System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
 			context.setDriver(initializeBrowser(browserName));
 			context.setWait(initializeBrowserWait(context.getDriver()));
 			context.getDriver().get(url);
@@ -61,7 +63,7 @@ public class loginPage extends webAppHelper {
 			try {
 				context.getExtentTestScenario()
 						.createNode(new GherkinKeyword("When"), "User navigates to " + url + " using " + browserName)
-						.fail("FALIED: " + e.getMessage());
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -75,8 +77,8 @@ public class loginPage extends webAppHelper {
 		try {
 			// Step Definition
 			System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
-			context.getWait().until(ExpectedConditions.presenceOfElementLocated(login_link));
-			context.getDriver().findElement(login_link).click();
+			context.getWait().until(ExpectedConditions.presenceOfElementLocated(loginPage.getElement("login_link")));
+			context.getDriver().findElement(loginPage.getElement("login_link")).click();
 
 			// Extent Report
 			context.getExtentTestScenario().createNode(new GherkinKeyword("When"), "User click on the login link")
@@ -87,7 +89,7 @@ public class loginPage extends webAppHelper {
 			// Extent Report
 			try {
 				context.getExtentTestScenario().createNode(new GherkinKeyword("When"), "User click on the login link")
-						.fail("FALIED: " + e.getMessage());
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -113,7 +115,7 @@ public class loginPage extends webAppHelper {
 			try {
 				context.getExtentTestScenario()
 						.createNode(new GherkinKeyword("When"), "User enter the username as " + username)
-						.fail("FALIED: " + e.getMessage());
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -139,7 +141,7 @@ public class loginPage extends webAppHelper {
 			try {
 				context.getExtentTestScenario()
 						.createNode(new GherkinKeyword("When"), "User enter the password as " + password)
-						.fail("FALIED: " + e.getMessage());
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -165,7 +167,7 @@ public class loginPage extends webAppHelper {
 			// Extent Report
 			try {
 				context.getExtentTestScenario().createNode(new GherkinKeyword("When"), "User click on the login button")
-						.fail("FALIED: " + e.getMessage());
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -192,7 +194,7 @@ public class loginPage extends webAppHelper {
 			try {
 				context.getExtentTestScenario()
 						.createNode(new GherkinKeyword("When"), "User sees that login is successful")
-						.fail("FALIED: " + e.getMessage());
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -211,17 +213,16 @@ public class loginPage extends webAppHelper {
 			context.getSoftAssert().assertEquals(text.trim(), "Username or Password is incorrect.");
 
 			// Extent Report
-			context.getExtentTestScenario().createNode(new GherkinKeyword("When"),
-					"User sees that login is not successful").pass("PASSED");
+			context.getExtentTestScenario()
+					.createNode(new GherkinKeyword("When"), "User sees that login is not successful").pass("PASSED");
 
 		} catch (Exception e) {
 
 			// Extent Report
 			try {
 				context.getExtentTestScenario()
-						.createNode(new GherkinKeyword("When"),
-								"User sees that login is not successful")
-						.fail("FALIED: " + e.getMessage());
+						.createNode(new GherkinKeyword("When"), "User sees that login is not successful")
+						.fail("FAILED: " + e.getMessage());
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

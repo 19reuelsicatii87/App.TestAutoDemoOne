@@ -51,7 +51,17 @@ public class webApiHook extends webAppHelper {
 		System.out.println("BeforeScenario - Thread ID" + Thread.currentThread().getId());
 
 		// Define Extent Report
+		// ====================================================
+		/*
 		extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/reports/extentReport"
+				+ new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".html");
+
+		extentReports.attachReporter(extentSparkReporter);
+		*/
+		
+		// Define Extent Report XAMPP htdocs Folder - Image not resolving
+		// ==============================================================================
+		extentSparkReporter = new ExtentSparkReporter("C:/xampp/htdocs/AutomationProject/reports/webApi"
 				+ new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".html");
 
 		extentReports.attachReporter(extentSparkReporter);

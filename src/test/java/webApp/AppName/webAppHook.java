@@ -63,7 +63,7 @@ public class webAppHook extends webAppHelper {
 
 		// Define Extent Report XAMPP htdocs Folder - Image not resolving
 		// ==============================================================================
-		extentSparkReporter = new ExtentSparkReporter("C:/xampp/htdocs/AutomationProject/reports/extentReport"
+		extentSparkReporter = new ExtentSparkReporter("C:/xampp/htdocs/AutomationProject/reports/webApp"
 				+ new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date()) + ".html");
 
 		extentReports.attachReporter(extentSparkReporter);

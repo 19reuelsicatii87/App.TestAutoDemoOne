@@ -69,7 +69,7 @@ public class webAppHelper {
 			// =============================================
 			chromeOptions.setPlatformName("Windows 10");
 			chromeOptions.setBrowserVersion("92");
-			Map<String, Object> cloudOptions = new HashMap<>();
+			HashMap<String, Object> cloudOptions = new HashMap<>();
 			cloudOptions.put("build", "myTestBuild");
 			cloudOptions.put("name", "myTestName");
 			chromeOptions.setCapability("cloud:options", cloudOptions);
